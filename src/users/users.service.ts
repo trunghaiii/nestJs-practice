@@ -10,10 +10,12 @@ export class UsersService {
 
   constructor(@InjectModel(User.name) private UserModel: Model<User>) { }
 
-  async create(name: string, email: string, password: string) {
+  async create(userData: CreateUserDto) {
 
     let newUser = this.UserModel.create({
-      name, email, password
+      name: userData.name,
+      email: userData.email,
+      password: userData.password
     })
 
     return newUser;
