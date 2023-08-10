@@ -12,7 +12,7 @@ export class UsersService {
 
   async create(userData: CreateUserDto) {
 
-    let newUser = this.UserModel.create({
+    let newUser = await this.UserModel.create({
       name: userData.name,
       email: userData.email,
       password: userData.password
@@ -25,8 +25,8 @@ export class UsersService {
     return `This action returns all users`;
   }
 
-  findOne(id: string) {
-    let foundUser = this.UserModel.findOne({
+  async findOne(id: string) {
+    let foundUser = await this.UserModel.findOne({
       _id: id
     })
 
@@ -35,8 +35,11 @@ export class UsersService {
     return `This action returns a #${id} user`;
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+  async update(id: string, updateUserDto: UpdateUserDto) {
+
+    //console.log(updateUserDto);
+    let updateUser = await this.UserModel.updateOne({ _id: id }, updateUserDto)
+    return updateUser;
   }
 
   remove(id: number) {
