@@ -25,7 +25,13 @@ export class UsersService {
     return `This action returns all users`;
   }
 
-  findOne(id: number) {
+  findOne(id: string) {
+    let foundUser = this.UserModel.findOne({
+      _id: id
+    })
+
+    return foundUser;
+
     return `This action returns a #${id} user`;
   }
 
